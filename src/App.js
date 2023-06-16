@@ -15,7 +15,36 @@ const TASKS = [
   },
 ];
 
+
+function App() {
+  const [tasks, setTasks] = useState(TASKS);
+
+  const updateTaskStatus = (taskId) => {
+
+    // create a new list of tasks with toggle complete value
+    const updatedTasks = tasks.map(task => {
+      if(task.id === taskId) {
+        task.isComplete = !task.isComplete;
+      };
+      return {...task}
+    });
+
+    setTasks(updatedTasks);
+  }
+
+  const updateDelete = (taskId) => {
+      const updatedTasks = tasks.map((task) => {
+        if (task.id !== taskId) {
+          return { ...task };
+        }
+      });
+    }}
+
+
+// what we initially started with in this file
+// THIS IS WHERE WE NEED TO PICK BACK UP, REFER TO LINES 32-42 IN TASK.JS
 const App = () => {
+  
   return (
     <div className="App">
       <header className="App-header">
