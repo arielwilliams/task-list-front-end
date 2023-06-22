@@ -27,6 +27,8 @@ TaskList.propTypes = {
       isComplete: PropTypes.bool.isRequired,
     })
   ).isRequired,
+  complete:PropTypes.string, // is it a string?
+  setComplete:PropTypes.function.isRequired
 };
 
 export default TaskList;
