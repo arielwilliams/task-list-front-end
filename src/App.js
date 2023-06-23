@@ -137,6 +137,7 @@ import './App.css';
       }
     });
 
+
     // taken from https://stackoverflow.com/questions/28607451/removing-undefined-values-from-array
     const filteredUpdatedData = updatedTasks.filter(function (element) {
       return element !== undefined;

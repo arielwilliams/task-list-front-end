@@ -23,13 +23,17 @@ const Task = (props) => {
       >
         {props.title}
       </button>
-      <button className="tasks__item__remove button" onClick={toggleDelete}>
+      <button className="tasks__item__remove button" onClick={toggleDelete} data-testid={`delete button ${props.id}`}>
         x
       </button>
     </li>
   );
 };
- 
+
+// how I passed test('Runs callbacks when buttons clicked') for wave 2
+// needed specific testid and updated props names in tests for updateComplete and updateDelete
+// getByTestId is a func in react test library
+
 Task.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
