@@ -24,11 +24,30 @@ TaskList.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
-      isComplete: PropTypes.bool.isRequired,
+      isComplete: PropTypes.bool,
     })
-  ).isRequired,
-  complete:PropTypes.string, // is it a string?
-  setComplete:PropTypes.function.isRequired
+  ),
+  toggleCompleteTask:PropTypes.func, 
+  deleteTask:PropTypes.func
 };
 
 export default TaskList;
+
+
+// AnimalList.propTypes = {
+//   listOfAnimals: PropTypes.arrayOf(
+//       PropTypes.shape({
+//           name: PropTypes.string,
+//           id: PropTypes.number.isRequired,
+//           species: PropTypes.string.isRequired,
+//           adopted: PropTypes.bool,
+//           age: PropTypes.number,
+//           photo: PropTypes.string,
+//           isBookmarked: PropTypes.bool
+//       })
+//   ), 
+//   updateBookmark: PropTypes.func,
+//   updateDelete: PropTypes.func
+// }
+
+// export default AnimalList;

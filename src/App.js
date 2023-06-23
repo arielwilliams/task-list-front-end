@@ -1,6 +1,7 @@
-import React, { useState }  from 'react';
+import React, { useState, useEffect }  from 'react';
 import TaskList from './components/TaskList.js';
 import './App.css';
+import axios from 'axios';
 
 // WHAT WE NEED TO DO 
 // iterate through tasks, grab the task by id, and then update whether the task is complete or not
@@ -25,7 +26,29 @@ import './App.css';
       }
     ]);
 
-  const updateTaskStatus = (taskId) => {
+
+    const loadTasks= () => {
+      axios
+        .get("https://task-list-api-c17.onrender.com/tasks")
+        .then((response) => {
+          const initialTaskData = [];
+          response.data.forEach((task) => {
+            initialTaskData.push(task);
+          });
+          setTasks(initialTaskData);
+        })
+        .catch((error) => {
+          console.log("error", error);
+        });
+    }
+  
+    useEffect( () => {
+      loadTasks();
+    }, []);
+
+
+  // old name: const updateTaskStatus = (taskId) => {
+    const toggleCompleteTask = (taskId) => {
 
     // create a new list of tasks with toggle complete value
     const updatedTasks = tasks.map(task => {
@@ -41,7 +64,8 @@ import './App.css';
   };
 
 
-  const updateDelete = (taskId) => {
+  // old name: const updateDelete = (taskId) => {
+    const deleteTask = (taskId) => {
     const updatedTasks= tasks.map((task) => {
       if (task.id !== taskId) {
         return { ...task};
@@ -67,8 +91,8 @@ import './App.css';
       <div>
         {<TaskList 
         tasks={tasks} 
-        onUpdateTaskStatus={updateTaskStatus}
-        onDelete={updateDelete}/>}
+        updateComplete={toggleCompleteTask}
+        updateDelete={deleteTask}/>}
       </div>
     </main>
   </div>
@@ -77,3 +101,9 @@ import './App.css';
 
 export default App;
 
+
+// JSX was this
+// {<TaskList 
+//   tasks={tasks} 
+//   onUpdateTaskStatus={toggleCompleteTask}
+//   onDelete={deleteTask}/>}
