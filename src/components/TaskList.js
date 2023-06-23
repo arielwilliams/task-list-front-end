@@ -27,8 +27,8 @@ TaskList.propTypes = {
       isComplete: PropTypes.bool,
     })
   ),
-  toggleCompleteTask:PropTypes.func, 
-  deleteTask:PropTypes.func
+  toggleCompleteTask: PropTypes.func,
+  deleteTask: PropTypes.func
 };
 
 export default TaskList;

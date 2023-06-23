@@ -1,5 +1,6 @@
 import React, { useState, useEffect }  from 'react';
 import TaskList from './components/TaskList.js';
+import NewTaskForm from "./components/NewTaskForm";
 import './App.css';
 import axios from 'axios';
 
@@ -81,18 +82,38 @@ import axios from 'axios';
     setTasks(filteredUpdatedData);
   };
 
+  const createNewTask = (newTaskInfo) => {
+    console.log(newTaskInfo)
+    axios
+      .post("https://task-list-api-c17.onrender.com/tasks", newTaskInfo)
+      .then(() => {
+        // TWO OPTIONS:
+        //  make another GET request to refresh the page <-- DO THIS! 
+        // loadTasks();
+
+        // update the tasks state to refresh the page
+        const newTasksArray = [...tasks];
+        newTasksArray.push(newTaskInfo);
+        setTasks(newTasksArray)
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  } 
   // pick up here, refer to this: https://github.com/Ada-C19/sapphire-flasky-frontend/commit/1e41a759daa93e96aa69219e6037c9d7933b1e83
   return (
     <div className="App">
     <header className="App-header">
       <h1>Ada&apos;s Task List</h1>
+      <NewTaskForm createNewTask={createNewTask}/>
     </header>
     <main>
       <div>
-        {<TaskList 
+        <TaskList 
         tasks={tasks} 
         updateComplete={toggleCompleteTask}
-        updateDelete={deleteTask}/>}
+        updateDelete={deleteTask}/>
       </div>
     </main>
   </div>
